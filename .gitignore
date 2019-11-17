@@ -207,3 +207,7 @@ venv.bak/
 pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/macos,flask,python,virtualenv
+flask_session/
+
+flask_session/2029240f6d1128be89ddc32729463129
+flask_session/631215ec752a602d49d830dff1a9eca7
