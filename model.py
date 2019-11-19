@@ -1,11 +1,10 @@
-from application import db
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.ext.declarative import declarative_base  
+from .application import db
 
 
 # database schema
-class User(db.Model):
 
+
+class User(db.Model):
     __tablename__ = 'Users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(65), index=True, unique=True)

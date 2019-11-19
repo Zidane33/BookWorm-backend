@@ -39,6 +39,9 @@
             <li class="nav-item">
               <a href="#contact" class="nav-link">Contact</a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url_for('register') }}" class="nav-link">Register</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -46,7 +49,7 @@
 
     {% block content %} {% endblock %}
 
-    <footer id="main-footer" class="py-5 bg-primary text-white">
+    <footer id="main-footer" class="py-5 bg-primary text-white fixed-bottom">
       <div class="container">
         <div class="row text-center">
           <div class="col">
