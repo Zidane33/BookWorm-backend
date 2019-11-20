@@ -1,3 +1,3 @@
-# Project 1
+# BookWorm
 
-Web Programming with Python and JavaScript
+Organize Your Research

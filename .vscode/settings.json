@@ -1,9 +1,0 @@
-{
-    "python.pythonPath": "/Users/zidan/Code/BookWorm-backend/env/bin/python3",
-    "python.autoComplete.extraPaths": [
-        "./Users/mohamedzidan/Code/BookWorm Flask"
-    ],
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true
-}
