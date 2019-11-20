@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+<link rel="stylesheet" href="../static/css/style.css" />
+
+{% block content %} 
+
+{% if session['logged_in'] %} 
+
+You're logged in already! 
+
+{% else %}
+<!-- <form action="/login" method="POST">
+        <input type="username" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Log in">
+    </form> -->
+<section id="newsletter" class="bg-dark text-white py-5">
+  <div class="container">
+    <form action="/login" method="POST" class="row">
+        <div class="col-md-4">
+          <input
+            type="text"
+            name="username"
+            class="form-control form-control-lg mb-resp"
+            placeholder="Enter Userame"
+          />
+        </div>
+        <div class="col-md-4">
+          <input
+            type="password"
+            name="password"
+            class="form-control form-control-lg mb-resp"
+            placeholder="Enter Password"
+          />
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-primary btn-lg btn-block">
+            <i class="fas fa-envelope-open-o"></i>
+            Log in
+          </button>
+        </div>
+    </form>
+  </div>
+</section>
+
+{% endif %} 
+
+{% endblock %}
