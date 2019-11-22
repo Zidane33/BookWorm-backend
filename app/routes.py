@@ -23,6 +23,9 @@ def do_admin_login():
         if request.form['password'] == 'password' and request.form['username'] == 'admin':
             session['logged_in'] = True
             return render_template('logged.html')
+        elif db.session.query(request.form['password']) and db.session.query(request.form['username']):
+            session['logged_in'] = True
+            flash('CONGRATS YOU LOGGED IN')
         else:
             flash('wrong password')
     return index()
@@ -40,7 +43,6 @@ def logout():
 def register():
     from .model import User
     form = RegisterForm()
-    app.logger.debug(form.errors)
     if form.validate_on_submit():
         u = User(username=form.username.data, email=form.email.data, password_hash=form.password.data)
         db.session.add(u)
