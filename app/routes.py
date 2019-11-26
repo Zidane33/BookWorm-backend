@@ -1,7 +1,10 @@
-from flask import session, render_template, request, flash
+from flask import session, render_template, flash, redirect, url_for
 from flask_session import Session
-from .forms import RegisterForm
+from flask_login import current_user, login_user, logout_user
+from .forms import RegisterForm, LoginForm
 from app import app, db
+from .model import User
+
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -17,26 +20,25 @@ def index():
         return render_template('logged.html')
 
 
-@app.route('/login', methods=['POST'])
-def do_admin_login():
-    if request.method == "POST":
-        if request.form['password'] == 'password' and request.form['username'] == 'admin':
-            session['logged_in'] = True
-            return render_template('logged.html')
-        elif db.session.query(request.form['password']) and db.session.query(request.form['username']):
-            session['logged_in'] = True
-            flash('CONGRATS YOU LOGGED IN')
-        else:
-            flash('wrong password')
-    return index()
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid Username or Password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        return render_template('logged.html')
+    return render_template('login.html', form=form)
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
-    if request.method == 'POST':
-        if request.form['logout'] == 'logout':
-            session['logged_in'] = False
-            return index()
+    logout_user()
+    return index()
 
 
 @app.route('/register', methods=['POST', 'GET'])
