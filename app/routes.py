@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, logout_user
 from .forms import RegisterForm, LoginForm
 from app import app, db
 from .model import User
-from .api import *
+from .api import api
 
 
 # Configure session to use filesystem
@@ -57,4 +57,5 @@ def register():
 
 @app.route('/api', methods=["GET"])
 def api_route():
-    return api()
+    title = api()
+    return render_template('book.html', title=title)
