@@ -256,3 +256,5 @@ nosetests.xml
 venv
 app.db
 microblog.log*
+app/api-key.py
+app/apiKey.py
