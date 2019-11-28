@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user
 from .forms import RegisterForm, LoginForm
 from app import app, db
 from .model import User
+from .api import *
 
 
 # Configure session to use filesystem
@@ -46,8 +47,14 @@ def register():
     from .model import User
     form = RegisterForm()
     if form.validate_on_submit():
-        u = User(username=form.username.data, email=form.email.data, password_hash=form.password.data)
+        u = User(username=form.username.data, email=form.email.data,
+                 password_hash=form.password.data)
         db.session.add(u)
         db.session.commit()
         flash('CONGRATS YOU ARE REGISTERED')
     return render_template('register.html', form=form)
+
+
+@app.route('/api', methods=["GET"])
+def api_route():
+    return api()
