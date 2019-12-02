@@ -1,6 +1,7 @@
 from flask import session, render_template, flash, redirect, url_for
 from flask_session import Session
 from flask_login import current_user, login_user, logout_user
+import re
 from .forms import RegisterForm, LoginForm
 from app import app, db
 from .model import User
@@ -57,5 +58,20 @@ def register():
 
 @app.route('/api', methods=["GET"])
 def api_route():
-    title = api()
-    return render_template('book.html', title=title)
+    data = api()
+    title = data["title"]
+    author = data['author']
+    categories = data['categories']
+    description = re.sub('/<.*?>/gm', '', data['description'])
+    image = data['image']
+    isbn = data['isbn']
+    publishDate = data['publishDate']
+    return render_template('book.html',
+                           title=title,
+                           author=author,
+                           categories=categories,
+                           description=description,
+                           image=image,
+                           isbn=isbn,
+                           publishDate=publishDate)
+    # return data

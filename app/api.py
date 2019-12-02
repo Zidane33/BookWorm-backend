@@ -4,6 +4,14 @@ from .apiKey import KEY
 
 def api():
     bookId = 'tcSMCwAAQBAJ?'
-    url = "https://www.googleapis.com/books/v1/volumes/" + bookId + "key=" + KEY
+    url = f"https://www.googleapis.com/books/v1/volumes/{bookId}key={KEY}"
     response = requests.get(url).json()
-    return response['volumeInfo']['title']
+    data = {'title': response['volumeInfo']['title'],
+            'author': response['volumeInfo']['authors'][0],
+            'categories': response['volumeInfo']['categories'][0],
+            'description': response['volumeInfo']['description'],
+            'image': response['volumeInfo']['imageLinks']['medium'],
+            'isbn': response['volumeInfo']['industryIdentifiers'][0]['identifier'],
+            'publishDate': response['volumeInfo']['publishedDate']}
+    return data
+    # return response
