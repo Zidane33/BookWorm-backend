@@ -16,10 +16,8 @@ Session(app)
 
 @app.route("/")
 def index():
-    if not session.get('logged_in'):
-        return render_template('home.html')
-    else:
-        return render_template('logged.html')
+    return render_template('home.html')
+
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -33,7 +31,7 @@ def login():
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        return render_template('logged.html')
+        return render_template('dashboard.html')
     return render_template('login.html', form=form)
 
 
@@ -74,4 +72,8 @@ def api_route():
                            image=image,
                            isbn=isbn,
                            publishDate=publishDate)
-    # return data
+
+
+@app.route('/dashboard', methods=["GET"])
+def dashboard():
+    return render_template('dashboard.html')
