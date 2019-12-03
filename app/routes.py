@@ -1,4 +1,4 @@
-from flask import session, render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for
 from flask_session import Session
 from flask_login import current_user, login_user, logout_user
 import re
@@ -17,7 +17,6 @@ Session(app)
 @app.route("/")
 def index():
     return render_template('home.html')
-
 
 
 @app.route('/login', methods=['POST', 'GET'])

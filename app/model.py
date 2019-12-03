@@ -8,12 +8,20 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(65), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    projects = db.relationship('Project', backref="User", lazy=True)
 
     def __repr__(self):
         return '<User {}'.format(self.username)
 
     def check_password(self, password):
         return self.password_hash == password
+
+
+class Project(db.Model):
+    __tablename__ = 'Projects'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
 
 
 @login.user_loader
