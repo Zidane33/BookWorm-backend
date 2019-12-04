@@ -22,6 +22,14 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'))
+    books = db.relationship('Books', backref="Project", lazy=True)
+
+
+class Books(db.Model):
+    __tableame = 'Books'
+    id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.String(20))
+    project_id = db.Column(db.Integer, db.ForeignKey('Projects.id'))
 
 
 @login.user_loader
