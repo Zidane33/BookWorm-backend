@@ -5,7 +5,7 @@ import re
 from .forms import RegisterForm, LoginForm
 from app import app, db
 from .model import User
-from .api import api
+from .api import api, search
 
 
 # Configure session to use filesystem
@@ -76,3 +76,9 @@ def api_route():
 @app.route('/dashboard', methods=["GET"])
 def dashboard():
     return render_template('dashboard.html')
+
+
+@app.route('/search', methods=["GET"])
+def query():
+    books = search('harry potter')
+    return render_template('search.html', books=books)

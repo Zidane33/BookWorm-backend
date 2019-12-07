@@ -2,7 +2,16 @@ import requests
 from .apiKey import KEY
 
 
-def api():
+def search(query):
+    url = f'https://www.googleapis.com/books/v1/volumes?q={query}'
+    response = requests.get(url).json()
+    result = []
+    for book in response['items']:
+        result.append(book['volumeInfo']['title'])
+    return result
+
+
+def api(bookId):
     bookId = 'tcSMCwAAQBAJ?'
     url = f"https://www.googleapis.com/books/v1/volumes/{bookId}key={KEY}"
     response = requests.get(url).json()
