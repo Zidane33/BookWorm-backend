@@ -1,5 +1,5 @@
 import requests
-from .apiKey import KEY
+# from .apiKey import KEY
 
 
 def search(query):
@@ -12,8 +12,7 @@ def search(query):
 
 
 def api(bookId):
-    bookId = 'tcSMCwAAQBAJ?'
-    url = f"https://www.googleapis.com/books/v1/volumes/{bookId}key={KEY}"
+    url = f"https://www.googleapis.com/books/v1/volumes/{bookId}"
     response = requests.get(url).json()
     data = {'title': response['volumeInfo']['title'],
             'author': response['volumeInfo']['authors'][0],
@@ -23,4 +22,3 @@ def api(bookId):
             'isbn': response['volumeInfo']['industryIdentifiers'][0]['identifier'],
             'publishDate': response['volumeInfo']['publishedDate']}
     return data
-    # return response
