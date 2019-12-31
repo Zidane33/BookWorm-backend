@@ -53,13 +53,12 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route('/api', methods=["POST", "GET"])
+@app.route('/api/', methods=["POST", "GET"])
 def api_route():
-    bookId = request.form['bookSearch']
+    bookId = request.args.get('bookSearch')
     data = api(bookId)
     title = data["title"]
     author = data['author']
-    categories = data['categories']
     description = re.sub('/<.*?>/gm', '', data['description'])
     image = data['image']
     isbn = data['isbn']
@@ -67,7 +66,6 @@ def api_route():
     return render_template('book.html',
                            title=title,
                            author=author,
-                           categories=categories,
                            description=description,
                            image=image,
                            isbn=isbn,
@@ -79,7 +77,15 @@ def dashboard():
     return render_template('dashboard.html')
 
 
-@app.route('/search', methods=["GET"])
+@app.route('/search', methods=["GET", "POST"])
 def query():
-    books = search('harry potter')
-    return render_template('search.html', books=books)
+    bookSearch = request.form['bookSearch']
+    books = search(bookSearch)
+    bookTitles = []
+    for title in books['items']:
+        bookTitles.append(title['volumeInfo']['title'])
+    links = []
+    for title in books['items']:
+        links.append(title['id'])
+    data = zip(bookTitles, links)
+    return render_template('search.html', data=data)

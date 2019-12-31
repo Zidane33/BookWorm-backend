@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<ul class="list-group">
-    <li class="list-group-item">{{ books.0 }}</li>
-    <li class="list-group-item">{{ books.1 }}</li>
-    <li class="list-group-item">{{ books.2 }}</li>
-    <li class="list-group-item">{{ books.3 }}</li>
-    <li class="list-group-item">{{ books.4 }}</li>
-    <li class="list-group-item">{{ books.5 }}</li>
-</ul>
+<h3>Select the book you would like to add to your project</h3>
+    {% for title, link in data %}
+    <ul class="list-group">
+        <li class="list-group-item">
+        <a href='/api?bookSearch={{link}}'>{{ title }}</a>
+        </li>
+    </ul>
+    {% endfor %}
 {% endblock %}
