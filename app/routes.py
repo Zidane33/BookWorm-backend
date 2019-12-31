@@ -1,11 +1,12 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 from flask_session import Session
 from flask_login import current_user, login_user, logout_user
 import re
 from .forms import RegisterForm, LoginForm
 from app import app, db
-from .model import User
+from .model import User, Project
 from .api import api, search
+from .db_methods import addProjectToDatabase
 
 
 # Configure session to use filesystem
@@ -30,6 +31,7 @@ def login():
             flash('Invalid Username or Password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
+        session['user_id'] = user.id
         return render_template('dashboard.html')
     return render_template('login.html', form=form)
 
@@ -74,7 +76,9 @@ def api_route():
 
 @app.route('/dashboard', methods=["GET", "POST"])
 def dashboard():
-    return render_template('dashboard.html')
+    projects = Project.query.filter_by(user_id=session['user_id']).all()
+    app.logger.info(projects[0].title)
+    return render_template('dashboard.html', projects=projects)
 
 
 @app.route('/search', methods=["GET", "POST"])
@@ -89,3 +93,11 @@ def query():
         links.append(title['id'])
     data = zip(bookTitles, links)
     return render_template('search.html', data=data)
+
+
+@app.route('/project', methods=["POST"])
+def add_project():
+    userId = session['user_id']
+    project = request.form['addProject']
+    addProjectToDatabase(project, userId)
+    return render_template('dashboard.html')

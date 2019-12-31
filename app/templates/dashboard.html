@@ -7,16 +7,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <a href="#" data-toggle="modal" data-target="#addProjectModal" class="btn btn-primary btn-block">
+                <a href="#" data-toggle="modal" data-target="#projectModal" class="btn btn-primary btn-block">
                     <i class="fas fa-plus"></i>
                     Add New Project
                 </a>
             </div>
             <div class="col-md-3">
-                <a href="#" data-toggle="modal" data-target="#SelectModal" class="btn btn-primary btn-block">
-                    <i class="fas fa-angle-double-right"></i>
-                    Select Project
-                </a>
+                <select id="projects"  class="btn btn-primary btn-block">
+                    <option value="" disabled selected>Select Active Option</option>
+                    {% for project in projects %}
+                    <option value="{{project}}">{{project.title}}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
     </div>
@@ -29,7 +31,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-around">
                         <h4 class="d-inline">Latest Project</h4>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myModal"> 
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bookModal"> 
                             <i class="fas fa-plus"></i> Add Book</button>
                     </div>
                     <table class="table table-striped">
@@ -148,8 +150,8 @@
         </div>
     </div>
 </section>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+<!-- add book modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -164,6 +166,29 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" formaction={{url_for('query')}} class="btn btn-primary">Search Book</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- add project modal -->
+<div class="modal fade" id="projectModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action={{url_for('add_project')}} method="POST">
+                <input type="text" name="addProject">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" formaction={{url_for('add_project')}} class="btn btn-primary">Add Project</button>
                 </div>
             </form>
         </div>
