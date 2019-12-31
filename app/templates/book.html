@@ -14,7 +14,7 @@
             <ul>
                 <li><strong>Author: </strong>{{ author }}</li>
                 <li> <strong>Categories: </strong>{{ categories }}</li>
-                <li> <strong>Description:</strong> {{ description }}</li>
+                <li> <strong>Description:</strong> {{ description|striptags }}</li>
                 <li><strong>ISBN: </strong> {{ isbn }}</li>
                 <li><strong>Publish Date: </strong> {{ publishDate }}</li>
             </ul>

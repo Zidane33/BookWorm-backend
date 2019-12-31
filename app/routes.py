@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from flask_session import Session
 from flask_login import current_user, login_user, logout_user
 import re
@@ -53,9 +53,10 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route('/api', methods=["GET"])
+@app.route('/api', methods=["POST", "GET"])
 def api_route():
-    data = api('zyTCAlFPjgYC')
+    bookId = request.form['bookSearch']
+    data = api(bookId)
     title = data["title"]
     author = data['author']
     categories = data['categories']
@@ -73,7 +74,7 @@ def api_route():
                            publishDate=publishDate)
 
 
-@app.route('/dashboard', methods=["GET"])
+@app.route('/dashboard', methods=["GET", "POST"])
 def dashboard():
     return render_template('dashboard.html')
 
