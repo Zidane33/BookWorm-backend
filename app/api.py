@@ -16,6 +16,12 @@ def search(query):
     return response
 
 
+def searchCite(query):
+    url = f'https://www.googleapis.com/books/v1/volumes?q=isbn:{query}'
+    response = requests.get(url).json()
+    return response
+
+
 def api(bookId):
     url = f"https://www.googleapis.com/books/v1/volumes/{bookId}"
     response = requests.get(url).json()
@@ -25,8 +31,9 @@ def api(bookId):
     image = isField(response['volumeInfo']['imageLinks'], 'thumbnail')
     description = isField(response['volumeInfo'], 'description')
     publishDate = isField(response['volumeInfo'], 'publishedDate')
+    publisher = isField(response['volumeInfo'], 'publisher')
     try:
-        isbn = isField(response['volumeInfo']['industryIdentifier'][0]['identifer'])
+        isbn = response['volumeInfo']['industryIdentifiers'][0]['identifier']
     except KeyError:
         isbn = "Not Found"
 
@@ -35,5 +42,6 @@ def api(bookId):
             'description': description,
             'image': image,
             'isbn': isbn,
-            'publishDate': publishDate}
+            'publishDate': publishDate,
+            'publisher': publisher}
     return data

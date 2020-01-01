@@ -1,11 +1,11 @@
-from flask import render_template, flash, redirect, url_for, request, session
+from flask import render_template, flash, redirect, url_for, request, session, jsonify
 from flask_session import Session
 from flask_login import current_user, login_user, logout_user
 import re
 from .forms import RegisterForm, LoginForm
 from app import app, db
 from .model import User, Project, Books
-from .api import api, search
+from .api import api, search, searchCite
 from .db_methods import addProjectToDatabase
 
 
@@ -60,6 +60,7 @@ def api_route():
     projects = Project.query.filter_by(user_id=session['user_id']).all()
     bookId = request.args.get('bookSearch')
     data = api(bookId)
+    app.logger.info(data)
     title = data["title"]
     author = data['author']
     description = re.sub('/<.*?>/gm', '', data['description'])
@@ -115,7 +116,6 @@ def add_book():
         author = request.form['author']
         isbn = request.form['isbn']
         projectId = request.form['project']
-        app.logger.info(title, author, isbn, projectId)
         book = Books(title=title, author=author, isbn=isbn, project_id=projectId)
         db.session.add(book)
         db.session.commit()
@@ -128,3 +128,17 @@ def delete():
     Books.query.filter_by(id=toDelete).delete()
     db.session.commit()
     return redirect(url_for('dashboard'))
+
+
+@app.route('/cite', methods=["POST"])
+def cite():
+    isbn = request.form['isbnToSearch']
+    books = searchCite(isbn)
+    bookId = books['items'][0]['id']
+    book = api(bookId)
+    title = book['title']
+    author = book['author']
+    publishDate = book['publishDate']
+    publisher = book['publisher']
+    citation = f"{author}.({publishDate}). {title}. {publisher}"
+    return jsonify(citation), 200

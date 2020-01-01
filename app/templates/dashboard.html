@@ -65,10 +65,13 @@
                                     </form>
                                 </td>
                                 <td class="pt-1">
-                                    <a href="details.html" class="btn btn-secondary btn-sm">
-                                        <i class="fas fa-angle-double-right"></i>
-                                        Cite
-                                    </a>
+                                    <form action={{url_for('cite')}} method="POST">
+                                        <input type="hidden" name="isbnToSearch" value="{{book.isbn}}">
+                                        <button type="submit" class="btn btn-secondary btn-sm">
+                                            <i class="fas fa-angle-double-right"></i>
+                                            Cite
+                                        </button>
+                                    </form>
                                 </td>
                             {% endfor %}
                         </tbody>
