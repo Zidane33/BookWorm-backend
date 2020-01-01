@@ -120,3 +120,11 @@ def add_book():
         db.session.add(book)
         db.session.commit()
         return redirect(url_for('dashboard'))
+
+
+@app.route('/delete', methods=["POST"])
+def delete():
+    toDelete = request.form['delete']
+    Books.query.filter_by(id=toDelete).delete()
+    db.session.commit()
+    return redirect(url_for('dashboard'))

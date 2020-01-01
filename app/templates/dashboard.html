@@ -56,10 +56,13 @@
                                 <td>{{ book.author }}</td>
                                 <td>{{ book.isbn }}</td>
                                 <td class="pt-1">
-                                    <a href="details.html" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-angle-double-right"></i>
-                                        Delete
-                                    </a>
+                                    <form action={{url_for('delete')}} method="POST">
+                                        <input name="delete" type="hidden" value="{{book.id}}">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-angle-double-right"></i>
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                                 <td class="pt-1">
                                     <a href="details.html" class="btn btn-secondary btn-sm">
