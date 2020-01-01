@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, logout_user
 import re
 from .forms import RegisterForm, LoginForm
 from app import app, db
-from .model import User, Project
+from .model import User, Project, Books
 from .api import api, search
 from .db_methods import addProjectToDatabase
 
@@ -57,6 +57,7 @@ def register():
 
 @app.route('/api/', methods=["POST", "GET"])
 def api_route():
+    projects = Project.query.filter_by(user_id=session['user_id']).all()
     bookId = request.args.get('bookSearch')
     data = api(bookId)
     title = data["title"]
@@ -71,13 +72,17 @@ def api_route():
                            description=description,
                            image=image,
                            isbn=isbn,
-                           publishDate=publishDate)
+                           publishDate=publishDate,
+                           projects=projects)
 
 
 @app.route('/dashboard', methods=["GET", "POST"])
 def dashboard():
+    if request.method == 'POST':
+        books = Books.query.filter_by(project_id=request.form['project']).all()
+        projects = Project.query.filter_by(user_id=session['user_id']).all()
+        return render_template('dashboard.html', projects=projects, books=books)
     projects = Project.query.filter_by(user_id=session['user_id']).all()
-    app.logger.info(projects[0].title)
     return render_template('dashboard.html', projects=projects)
 
 
@@ -101,3 +106,17 @@ def add_project():
     project = request.form['addProject']
     addProjectToDatabase(project, userId)
     return render_template('dashboard.html')
+
+
+@app.route('/addBook', methods=["POST"])
+def add_book():
+    if request.method == "POST":
+        title = request.form['title']
+        author = request.form['author']
+        isbn = request.form['isbn']
+        projectId = request.form['project']
+        app.logger.info(title, author, isbn, projectId)
+        book = Books(title=title, author=author, isbn=isbn, project_id=projectId)
+        db.session.add(book)
+        db.session.commit()
+        return redirect(url_for('dashboard'))

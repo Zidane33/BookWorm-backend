@@ -28,6 +28,8 @@ class Project(db.Model):
 class Books(db.Model):
     __tableame = 'Books'
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), index=True)
+    author = db.Column(db.String(120), index=True)
     isbn = db.Column(db.String(20))
     project_id = db.Column(db.Integer, db.ForeignKey('Projects.id'))
 
