@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container text-center py-4">
+    <h2>Citation</h2>
+    <textarea name="" id="citation" cols="60" rows="5" class="my-2" value={{citation}}>
+        {{citation}}
+    </textarea>
+    <button id="button" onClick="copy()" class="btn btn-primary d-block mx-auto my-3">Copy</button>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    function copy() {
+        const citation = document.getElementById('citation');
+        citation.select();
+        document.execCommand('copy')
+    }
+    $(document).ready(() => {
+        $('#button').tooltip({
+            title: 'Copied!',
+            trigger: 'click',
+            placement: 'auto'
+        })
+    })
+</script>
+{% endblock script%}

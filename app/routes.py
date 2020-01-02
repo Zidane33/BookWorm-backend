@@ -137,8 +137,10 @@ def cite():
     bookId = books['items'][0]['id']
     book = api(bookId)
     title = book['title']
-    author = book['author']
-    publishDate = book['publishDate']
+    author = book['author'].split()
+    firstName = author[0]
+    lastName = author[1]
+    publishDate = book['publishDate'][:4]
     publisher = book['publisher']
-    citation = f"{author}.({publishDate}). {title}. {publisher}"
-    return jsonify(citation), 200
+    citation = f"{lastName}, {firstName} ({publishDate}). {title}. {publisher}"
+    return render_template('cite.html', citation=citation)
