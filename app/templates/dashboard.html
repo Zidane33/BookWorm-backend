@@ -14,13 +14,12 @@
             </div>
             <div class="col-md-3">
                 <form action="{{ url_for('dashboard')}}" method="POST">
-                    <select id="projects" name="project" class="btn btn-primary btn-block">
-                        <option value="" disabled selected>Select Active Option</option>
+                    <select id="projects" name="project" class="btn btn-primary btn-block" onchange="this.form.submit()">
+                        <option value="" disabled selected>Select Active Project</option>
                         {% for project in projects %}
                         <option value="{{project.id}}">{{project.title}}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>
@@ -84,11 +83,11 @@
                         <h3>Projects</h3>
                         <h4 class="display-4">
                             <i class="fas fa-pencil-alt"></i>
-                            2
+                            {{projects|count}}
                         </h4>
-                        <a href="#" class="btn btn-outline-light btn-sm">
+                        <button type="button" data-toggle="modal" data-target="#projectsModal" class="btn btn-outline-light btn-sm">
                             View
-                        </a>
+                        </button>
                     </div>
                 </div>
                 <div class="card text-center bg-dark text-white mb-3">
@@ -96,11 +95,11 @@
                         <h3>Books</h3>
                         <h4 class="display-4">
                             <i class="fas fa-pencil-alt"></i>
-                            6
+                            {{books|count}}
                         </h4>
-                        <a href="categories.html" class="btn btn-outline-light btn-sm">
+                        <button class="btn btn-outline-light btn-sm" type="button" data-target="#booksModal" data-toggle="modal">
                             View
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -148,6 +147,48 @@
                     <button type="submit" formaction={{url_for('add_project')}} class="btn btn-primary">Add Project</button>
                 </div>
             </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- projects modal -->
+<div class="modal fade" id="projectsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Projects</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ol>
+                {% for project in projects %}
+                <li>{{project.title}}</li>
+                {%endfor%}
+            </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- books modal -->
+<div class="modal fade" id="booksModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Books</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <ol>
+                {% for book in books %}
+                <li>{{book.title}}</li>
+                {%endfor%}
+            </ol>
         </div>
       </div>
     </div>

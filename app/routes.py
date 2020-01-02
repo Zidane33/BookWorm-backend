@@ -1,6 +1,6 @@
-from flask import render_template, flash, redirect, url_for, request, session, jsonify
+from flask import render_template, flash, redirect, url_for, request, session
 from flask_session import Session
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 import re
 from .forms import RegisterForm, LoginForm
 from app import app, db
@@ -15,15 +15,16 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+# Routes
 @app.route("/")
 def index():
-    return render_template('home.html')
+    return render_template('about.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('dashboard'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -39,7 +40,7 @@ def login():
 @app.route('/logout', methods=['POST', 'GET'])
 def logout():
     logout_user()
-    return index()
+    return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -78,6 +79,7 @@ def api_route():
 
 
 @app.route('/dashboard', methods=["GET", "POST"])
+@login_required
 def dashboard():
     if request.method == 'POST':
         books = Books.query.filter_by(project_id=request.form['project']).all()
@@ -106,7 +108,7 @@ def add_project():
     userId = session['user_id']
     project = request.form['addProject']
     addProjectToDatabase(project, userId)
-    return render_template('dashboard.html')
+    return redirect(url_for('dashboard'))
 
 
 @app.route('/addBook', methods=["POST"])
