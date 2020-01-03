@@ -32,12 +32,15 @@
   {% if not current_user.is_authenticated %}
   <section class="bg-dark text-white py-5">
     <div class="container text-center">
-        <button class="btn btn-primary btn-lg mx-2">
+        <button class="btn btn-primary btn-lg mx-2 my-5">
             <a class="text-white text-decoration-none" href="{{url_for('login')}}">Click Here To Login</a>
         </button>
-        <button class="btn btn-primary btn-lg mx-2">
-            <a class="text-white text-decoration-none" href="{{url_for('login')}}">Demo Login</a>
-        </button>
+        <form action={{url_for('login')}} method="POST">
+          <input type="hidden" name="demoLogin" value="login">
+          <button class="btn btn-primary btn-lg mx-2 text-white" type="submit">
+              Demo Login
+          </button>
+        </form>
     </div>
   </section>
   {% endif %}
@@ -349,14 +352,14 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
             exercitationem!
           </p>
-          <form action="">
+          <form action={{url_for('contact')}} method="POST">
             <div class="input-group input-group-lg mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text">
                   <i class="fas fa-user"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Name" />
+              <input type="text" class="form-control" placeholder="Name" name="name" />
             </div>
             <div class="input-group input-group-lg mb-3">
               <div class="input-group-prepend">
@@ -364,7 +367,7 @@
                   <i class="fas fa-envelope"></i>
                 </span>
               </div>
-              <input type="email" class="form-control" placeholder="Email" />
+              <input type="email" class="form-control" placeholder="Email" name="email"/>
             </div>
             <div class="input-group input-group-lg mb-3">
               <div class="input-group-prepend">
@@ -376,6 +379,7 @@
                 class="form-control"
                 placeholder="Message"
                 rows="5"
+                name="msg"
               ></textarea>
             </div>
             <input

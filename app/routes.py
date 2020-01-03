@@ -7,12 +7,26 @@ from app import app, db
 from .model import User, Project, Books
 from .api import api, search, searchCite
 from .db_methods import addProjectToDatabase
+from flask_mail import Mail, Message
+from .apiKey import password
 
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+# Flask-Mail config
+app.config.update(dict(
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
+    MAIL_USERNAME='midoz393@gmail.com',
+    MAIL_PASSWORD=password,
+    MAIL_USE_TLS=True,
+    MAIL_USE_SSL=False,
+))
+mail = Mail(app)
 
 
 # Routes
@@ -25,6 +39,10 @@ def index():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
+    if 'demoLogin' in request.form:
+        demoUser = User.query.filter_by(username='demo').first()
+        login_user(demoUser)
+        return render_template('dashboard.html')
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -146,3 +164,14 @@ def cite():
     publisher = book['publisher']
     citation = f"{lastName}, {firstName} ({publishDate}). {title}. {publisher}"
     return render_template('cite.html', citation=citation)
+
+
+@app.route('/contact', methods=["POST"])
+def contact():
+    name = request.form['name']
+    email = request.form['email']
+    msg = request.form['msg']
+    sendMsg = Message(subject="bookWorm", reply_to=email, sender=email, recipients=["midoz393@gmail.com"])
+    sendMsg.body = 'msg --' + msg + '--name--' + name + '--email--' + email
+    mail.send(sendMsg)
+    return redirect(url_for('index'))
