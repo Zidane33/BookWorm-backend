@@ -3,11 +3,12 @@ from flask_session import Session
 from flask_login import current_user, login_user, logout_user, login_required
 import re
 from .forms import RegisterForm, LoginForm
-from app import app, db, password
+from app import app, db
 from .model import User, Project, Books
 from .api import api, search, searchCite
 from .db_methods import addProjectToDatabase
 from flask_mail import Mail, Message
+import os
 
 
 # Configure session to use filesystem
@@ -22,7 +23,7 @@ app.config.update(dict(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=587,
     MAIL_USERNAME='midoz393@gmail.com',
-    MAIL_PASSWORD=password,
+    MAIL_PASSWORD=os.environ['PASSWORD'],
     MAIL_USE_TLS=True,
     MAIL_USE_SSL=False,
 ))

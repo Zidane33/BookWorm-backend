@@ -9,9 +9,8 @@ app = Flask(__name__)
 login = LoginManager(app)
 
 # database config
-app.config['SECRET_KEY'] = (os.environ['SECRET'])
-app.config['SQLALCHEMY_DATABASE_URI'] = (os.environ['DATABASE_URL'])
-app.config['PASSWORD'] = (os.environ['PASSWORD'])
+app.config['SECRET_KEY'] = os.environ['SECRET']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
