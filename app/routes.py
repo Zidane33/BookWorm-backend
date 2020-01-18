@@ -117,7 +117,13 @@ def query():
     links = []
     for title in books['items']:
         links.append(title['id'])
-    data = zip(bookTitles, links)
+    authors = []
+    for title in books['items']:
+        try:
+            authors.append(title['volumeInfo']['authors'][0])
+        except KeyError:
+            authors.append("Not Found")
+    data = zip(bookTitles, links, authors)
     return render_template('search.html', data=data)
 
 

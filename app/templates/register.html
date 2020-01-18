@@ -12,7 +12,6 @@
         <div class="col-md-6">
           <div class="form-group">
             {{ form.username (class_='form-control', placeholder="Enter Username *") }}
-            <br>
             {% for error in form.username.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}

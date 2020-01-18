@@ -7,14 +7,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <a href="#" data-toggle="modal" data-target="#projectModal" class="btn btn-primary btn-block">
+                <a href="#" data-toggle="modal" data-target="#projectModal" class="btn btn-primary btn-block mt-3">
                     <i class="fas fa-plus"></i>
                     Add New Project
                 </a>
             </div>
             <div class="col-md-3">
                 <form action="{{ url_for('dashboard')}}" method="POST">
-                    <select id="projects" name="project" class="btn btn-primary btn-block" onchange="this.form.submit()">
+                    <select id="projects" name="project" class="btn btn-primary btn-block mt-3" onchange="this.form.submit()">
                         <option value="" disabled selected>Select Active Project</option>
                         {% for project in projects %}
                         <option value="{{project.id}}">{{project.title}}</option>
@@ -31,10 +31,12 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-around">
-                        <h4 class="d-inline">Latest Project</h4>
+                    <div class="card-header d-flex justify-content-end">
+                        <h4 class="flex-grow-1 d-none d-sm-inline">Project</h4>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#bookModal"> 
                             <i class="fas fa-plus"></i> Add Book</button>
+                        <button type="button" class="btn btn-danger"> 
+                            <i class="fas fa-minus"></i> Delete Project</button>
                     </div>
                     <table class="table table-striped">
                         <thead class="thead-dark">
@@ -55,7 +57,7 @@
                                 <td>{{ book.author }}</td>
                                 <td>{{ book.isbn }}</td>
                                 <td class="pt-1">
-                                    <form action={{url_for('delete')}} method="POST">
+                                    <form action={{url_for('delete')}} method="POST" class="d-none d-sm-inline">
                                         <input name="delete" type="hidden" value="{{book.id}}">
                                         <button type="submit" class="btn btn-danger btn-sm">
                                             <i class="fas fa-angle-double-right"></i>
@@ -64,7 +66,7 @@
                                     </form>
                                 </td>
                                 <td class="pt-1">
-                                    <form action={{url_for('cite')}} method="POST">
+                                    <form action={{url_for('cite')}} method="POST" class="d-none d-sm-inline">
                                         <input type="hidden" name="isbnToSearch" value="{{book.isbn}}">
                                         <button type="submit" class="btn btn-secondary btn-sm">
                                             <i class="fas fa-angle-double-right"></i>

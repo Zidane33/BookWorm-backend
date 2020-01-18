@@ -2,18 +2,18 @@
 
 {% block content %} 
 
-<section id="newsletter" class="bg-dark text-white py-5">
+<section class="bg-dark text-white py-5">
   <div class="container">
       <div class="row">
-      <form action="/login" method="POST" class="form-group" novalidate>
+      <form action="/login" method="POST" class="form-group p-3" novalidate>
         {{ form.hidden_tag() }}
         <div>
           {{ form.username.label }}
-          {{ form.username(size=32)}} 
+          {{ form.username(size=32, class_="form-control")}} 
         </div>
         <div>
           {{ form.password.label }}
-          {{ form.password(size=32) }}<br>
+          {{ form.password(size=32, class_="form-control") }}<br>
         </div>
         <div>
           {{ form.remember_me() }} {{ form.remember_me.label }}

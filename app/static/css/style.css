@@ -6,3 +6,8 @@ h3 {
     width: 200px;
     height: 38px;
 }
+
+.card-height { 
+    min-height: 10em;
+
+}

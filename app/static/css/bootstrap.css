@@ -24,7 +24,7 @@ body {
   background: url("../assets/mountain-under-white-sky-3012603.jpg");
   min-height: 600px;
 }
-#showcase .primary-overlay {
+.primary-overlay {
   background: rgba(50, 146, 166, 0.8);
   position: absolute;
   top: 0;

@@ -2,10 +2,11 @@
 
 {% block content %}
 <h3>Select the book you would like to add to your project</h3>
-    {% for title, link in data %}
+    {% for title, link, author in data %}
     <ul class="list-group">
         <li class="list-group-item">
         <a href='/api?bookSearch={{link}}'>{{ title }}</a>
+        <p>--{{author}}</p>
         </li>
     </ul>
     {% endfor %}

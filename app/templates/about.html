@@ -6,16 +6,15 @@
       <div class="container">
         <div class="row mt-5 pt-5">
           <div class="col-lg-6 text-center">
-            <h1 class="display-2 mt-5 pt-5">
+            <h1 class="display-2 mt-5">
               Do what you want
             </h1>
             <p class="lead">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Asperiores, reiciendis?
+              Need to keep track of your research? Can't keep up with all the books in your thesis?
             </p>
-            <a href="#" class="btn btn-outline-secondary btn-lg text-white">
+            <a href={{url_for('register')}} class="btn btn-outline-secondary btn-lg text-white">
               <i class="fas fa-arrow-right"></i>
-              Read More
+              Start Here
             </a>
           </div>
           <div class="col-lg-6 mt-5">
@@ -45,57 +44,6 @@
   </section>
   {% endif %}
 
-  <section class="py-5" id="boxes">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="card text-center border-primary mb-resp">
-            <div class="card-body">
-              <h3 class="text-primary">Be Better</h3>
-              <p class="text-muted">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nulla, corporis?
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card text-center bg-primary text-white mb-resp">
-            <div class="card-body">
-              <h3>Be Better</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nihil, debitis.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card text-center border-primary mb-resp">
-            <div class="card-body">
-              <h3 class="text-primary">Be Better</h3>
-              <p class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Eligendi, quae?
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card text-center bg-primary text-white mb-resp">
-            <div class="card-body">
-              <h3>Be Better</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Facere, pariatur!
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="about" class="py-5 text-center bg-light">
     <div class="container">
       <div class="row">
@@ -105,8 +53,7 @@
               Why this tool?
             </h1>
             <p class="lead pb-3">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Labore, ducimus.
+              A simple way to keep track of all the books you are citing, reading or researching. 
             </p>
           </div>
         </div>
@@ -114,243 +61,13 @@
     </div>
   </section>
 
-  <div id="accordion" class="px-5">
-    <div class="card">
-      <div class="card-header">
-        <h5 class="mb-0">
-          <div
-            href="#collapse1"
-            data-toggle="collapse"
-            data-parent="#accordion"
-          >
-            <i class="fas fa-arrow-circle-down"></i> Get Inspired
-          </div>
-        </h5>
-      </div>
-      <div id="collapse1" class="collapse show">
-        <div class="card-body">
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Facilis vero accusantium esse delectus
-          exercitationem quo non repudiandae aliquam nostrum quos minus
-          obcaecati officia, ipsa eius ratione reprehenderit optio placeat
-          cupiditate illo temporibus assumenda numquam sit quisquam? Sint
-          assumenda autem amet odit similique, ex nobis! Sit.
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h5 class="mb-0">
-          <div
-            href="#collapse2"
-            data-toggle="collapse"
-            data-parent="#accordion"
-          >
-            <i class="fas fa-arrow-circle-down"></i> Stay Organized
-          </div>
-        </h5>
-      </div>
-      <div id="collapse2" class="collapse">
-        <div class="card-body">
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Facilis vero accusantium esse delectus
-          exercitationem quo non repudiandae aliquam nostrum quos minus
-          obcaecati officia, ipsa eius ratione reprehenderit optio placeat
-          cupiditate illo temporibus assumenda numquam sit quisquam? Sint
-          assumenda autem amet odit similique, ex nobis! Sit.
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <h5 class="mb-0">
-          <div
-            href="#collapse3"
-            data-toggle="collapse"
-            data-parent="#accordion"
-          >
-            <i class="fas fa-arrow-circle-down"></i> Never Lose
-          </div>
-        </h5>
-      </div>
-      <div id="collapse3" class="collapse">
-        <div class="card-body">
-          Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Facilis vero accusantium esse delectus
-          exercitationem quo non repudiandae aliquam nostrum quos minus
-          obcaecati officia, ipsa eius ratione reprehenderit optio placeat
-          cupiditate illo temporibus assumenda numquam sit quisquam? Sint
-          assumenda autem amet odit similique, ex nobis! Sit.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section id="authors" class="my-5 text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="info-header mb-5">
-            <h1 class="text-primary pb-3">
-              Meet your peers
-            </h1>
-            <p class="lead">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est
-              nisi necessitatibus, veniam voluptate quod sapiente.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-3 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="../static/assets/adult-attractive-beautiful-beauty-415829.jpg"
-                alt=""
-                class="img-fluid rounded-circle w-50 mb-3"
-              />
-              <h3>Susan Murphy</h3>
-              <h5 class="text-muted">Lead Writer</h5>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Pariatur, nemo?
-              </p>
-              <div class="d-flex justify-content-center">
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="../static/assets/man-portrait-old-artist-25758.jpg"
-                alt=""
-                class="img-fluid rounded-circle w-50 mb-3"
-              />
-              <h3>John Mann</h3>
-              <h5 class="text-muted">Lead Writer</h5>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Pariatur, nemo?
-              </p>
-              <div class="d-flex justify-content-center">
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="../static/assets/photography-of-a-guy-wearing-green-shirt-1222271.jpg"
-                alt=""
-                class="img-fluid rounded-circle w-50 mb-3"
-              />
-              <h3>Kevin Hall</h3>
-              <h5 class="text-muted">Lead Writer</h5>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Pariatur, nemo?
-              </p>
-              <div class="d-flex justify-content-center">
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <img
-                src="../static/assets/photo-of-a-woman-smiling-1520760.jpg"
-                alt=""
-                class="img-fluid rounded-circle w-50 mb-3"
-              />
-              <h3>Sam Powell</h3>
-              <h5 class="text-muted">Lead Writer</h5>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Pariatur, nemo?
-              </p>
-              <div class="d-flex justify-content-center">
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </div>
-                <div class="p-4">
-                  <a href="">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="bg-light py-5">
+  <section id="contact" class="bg-light py-1">
     <div class="container">
       <div class="row">
         <div class="col-lg-9">
-          <h3>Get in Touch</h3>
+          <h3 class="m-0">Get in Touch</h3>
           <p class="lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste,
-            exercitationem!
+            Feel free to contact us with any questions, bugs or feature requests!
           </p>
           <form action={{url_for('contact')}} method="POST">
             <div class="input-group input-group-lg mb-3">
