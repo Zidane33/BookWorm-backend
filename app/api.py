@@ -1,5 +1,4 @@
 import requests
-# from .apiKey import KEY
 
 
 def isField(endpoint, field):

@@ -3,12 +3,11 @@ from flask_session import Session
 from flask_login import current_user, login_user, logout_user, login_required
 import re
 from .forms import RegisterForm, LoginForm
-from app import app, db
+from app import app, db, password
 from .model import User, Project, Books
 from .api import api, search, searchCite
 from .db_methods import addProjectToDatabase
 from flask_mail import Mail, Message
-from .apiKey import password
 
 
 # Configure session to use filesystem
@@ -17,6 +16,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Flask-Mail config
+
 app.config.update(dict(
     DEBUG=True,
     MAIL_SERVER='smtp.gmail.com',
