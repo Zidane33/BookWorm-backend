@@ -181,3 +181,11 @@ def contact():
     sendMsg.body = 'msg --' + msg + '--name--' + name + '--email--' + email
     mail.send(sendMsg)
     return redirect(url_for('index'))
+
+
+@app.route('/deleteProject', methods=["POST"])
+def deleteProject():
+    toDelete = request.form['deleteProject']
+    Project.query.filter_by(id=toDelete).delete()
+    db.session.commit()
+    return redirect(url_for('dashboard'))

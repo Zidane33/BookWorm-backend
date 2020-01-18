@@ -31,7 +31,7 @@ class Books(db.Model):
     title = db.Column(db.String(120), index=True)
     author = db.Column(db.String(120), index=True)
     isbn = db.Column(db.String(20))
-    project_id = db.Column(db.Integer, db.ForeignKey('Projects.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('Projects.id', ondelete="CASCADE"))
 
 
 @login.user_loader
