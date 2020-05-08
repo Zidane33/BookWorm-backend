@@ -11,3 +11,13 @@ h3 {
     min-height: 10em;
 
 }
+
+.sticky-bottom {
+    position: sticky;
+    top: 100%;
+}
+
+#dashboard-title {
+    text-align: center;
+    margin: 2rem 0;
+}
