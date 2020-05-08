@@ -71,7 +71,7 @@ def register():
                  password_hash=form.password.data)
         db.session.add(u)
         db.session.commit()
-        flash('CONGRATS YOU ARE REGISTERED')
+        flash('Congrats, you are registered')
     return render_template('register.html', form=form)
 
 
